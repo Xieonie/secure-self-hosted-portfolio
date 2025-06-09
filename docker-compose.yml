@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  portfolio-nginx:
+    build:
+      context: ./nginx # Path to the Dockerfile and nginx.conf
+    container_name: portfolio_nginx
+    restart: always
+    volumes:
+      - ./src/html:/usr/share/nginx/html:ro # Mount your website files as read-only
+    ports:
+      - "127.0.0.1:8080:80" # Expose Nginx on host port 8080 (localhost only)
+                            # Cloudflared will connect to this.
+                            # Change if port 8080 is already in use.
+    networks:
+      - portfolio_network
+
+networks:
+  portfolio_network:
+    driver: bridge
