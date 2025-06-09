@@ -46,7 +46,7 @@ cloudflared login
 This will open a browser window asking you to log in to your Cloudflare account and select the zone (domain) you want to authorize.
 
 
-3. Create a Tunnel
+## 3. Create a Tunnel
 You can create a tunnel and give it a name.
 
 ```
@@ -56,16 +56,17 @@ cloudflared tunnel create your-portfolio-tunnel
 This command will output:
 
 A Tunnel ID (UUID).
-A path to a credentials file (e.g., ~/.cloudflared/<Tunnel-ID>.json). Keep this file secure.
+A path to a credentials file (e.g., ```~/.cloudflared/<Tunnel-ID>.json```). Keep this file secure.
 
 
 
-4. Configure the Tunnel to Route Traffic
+## 4. Configure the Tunnel to Route Traffic
 You need to tell the tunnel which local service to expose and under which hostname.
 
-Create a configuration file for cloudflared. The default location is ~/.cloudflared/config.yml, but for running as a service, it's often placed in /etc/cloudflared/config.yml.
+Create a configuration file for ```cloudflared```. The default location is ```~/.cloudflared/config.yml```, but for running as a service, it's often placed in ```/etc/cloudflared/config.yml```.
 
-An example config.yml might look like this:
+An example ```config.yml``` might look like this:
+
 
 ```
 # /etc/cloudflared/config.yml
@@ -95,16 +96,16 @@ Explanation:
 
     service: The local address of your web service (your Nginx container). If your docker-compose.yml maps Nginx port 80 to host port 8080 (e.g., 127.0.0.1:8080:80), then http://localhost:8080 is correct.
 
-5. Create a DNS Record for Your Tunnel
+## 5. Create a DNS Record for Your Tunnel
 
-Now, associate a public hostname (e.g., portfolio.yourdomain.com) with your tunnel using a CNAME record in Cloudflare DNS.
+Now, associate a public hostname (e.g., `portfolio.yourdomain.com`) with your tunnel using a CNAME record in Cloudflare DNS.
 
 ```
 cloudflared tunnel route dns your-portfolio-tunnel portfolio.yourdomain.com
 ```
 This command creates a CNAME record in your Cloudflare DNS settings that points ```portfolio.yourdomain.com``` to your tunnel's unique address.
 
-6. Run the Tunnel as a Service (Recommended)
+## 6. Run the Tunnel as a Service (Recommended)
 To ensure the tunnel runs persistently and starts on boot:
 
 ```
@@ -124,11 +125,11 @@ Your tunnel should show as ```HEALTHY```. Logs can typically be found using ```j
 
 
 
-7. Test Your Setup
+## 7. Test Your Setup
 Open ```https://portfolio.yourdomain.com``` in your browser. You should see your portfolio website, served through Cloudflare.
 
 
-8. Security Considerations with Cloudflare Tunnel
+## 8. Security Considerations with Cloudflare Tunnel
 
 Cloudflare WAF: Enable and configure Cloudflare's Web Application Firewall (WAF) for your domain to protect against common web threats.
 
