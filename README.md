@@ -32,24 +32,25 @@ This repository documents the development, hosting, and security hardening of my
 * **Simple Deployment:** Website changes can be deployed by updating the static files in the `src/` directory and, if necessary, rebuilding/restarting the Docker container.
 
 ## 🏛️ Repository Structure
-secure-self-hosted-portfolio/
-├── README.md
-├── docker-compose.yml
-├── nginx/
-│   ├── nginx.conf
-│   └── Dockerfile
-├── src/
-│   └── html/         # Your website's static files go here
-│       ├── index.html
-│       ├── css/
-│       │   └── style.css
-│       └── js/
-│           └── script.js
-├── docs/
-│   ├── server-hardening-checklist.md
-│   └── cloudflare-tunnel-setup.md
-└── config-examples/
-└── cloudflared-config.yml.example
+
+    secure-self-hosted-portfolio/
+    ├── README.md
+    ├── docker-compose.yml
+    ├── nginx/
+    │   ├── nginx.conf
+    │   └── Dockerfile
+    ├── src/
+    │   └── html/         # Your website's static files go here
+    │       ├── index.html
+    │       ├── css/
+    │       │   └── style.css
+    │       └── js/
+    │           └── script.js
+    ├── docs/
+    │   ├── server-hardening-checklist.md
+    │   └── cloudflare-tunnel-setup.md
+    └── config-examples/
+    └── cloudflared-config.yml.example
 
 
 ## 🚀 Getting Started / Configuration
