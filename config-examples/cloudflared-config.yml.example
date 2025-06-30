@@ -1,0 +1,69 @@
+# Cloudflared Configuration Example
+# Copy this file to your cloudflared configuration directory (usually ~/.cloudflared/)
+# and rename it to config.yml
+
+# Tunnel configuration
+tunnel: your-tunnel-id-here
+credentials-file: /path/to/your/tunnel/credentials.json
+
+# Ingress rules - define how traffic is routed
+ingress:
+  # Route traffic from your domain to the local Nginx container
+  - hostname: portfolio.yourdomain.com
+    service: http://localhost:8080
+    # Additional options for this service
+    originRequest:
+      # Disable TLS verification for local services
+      noTLSVerify: true
+      # Connection timeout
+      connectTimeout: 30s
+      # Keep alive connections
+      keepAliveConnections: 10
+      # HTTP/2 origin
+      http2Origin: false
+
+  # Catch-all rule (required as the last rule)
+  - service: http_status:404
+
+# Optional: Logging configuration
+logLevel: info
+logFile: /var/log/cloudflared.log
+
+# Optional: Metrics and health checks
+metrics: localhost:8081
+
+# Optional: Auto-update configuration
+autoupdate-freq: 24h
+
+# Optional: Protocol configuration
+protocol: auto
+
+# Optional: Edge IP version preference
+edge-ip-version: auto
+
+# Optional: Retries configuration
+retries: 5
+
+# Optional: Grace period for shutdown
+grace-period: 30s
+
+# Optional: Compression
+compression: gzip
+
+# Optional: No chunked encoding
+no-chunked-encoding: false
+
+# Example for multiple services:
+# ingress:
+#   - hostname: portfolio.yourdomain.com
+#     service: http://localhost:8080
+#   - hostname: api.yourdomain.com
+#     service: http://localhost:3000
+#   - hostname: admin.yourdomain.com
+#     service: http://localhost:9000
+#     originRequest:
+#       # Require authentication for admin panel
+#       access:
+#         required: true
+#         teamName: your-team-name
+#   - service: http_status:404
